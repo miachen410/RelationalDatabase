@@ -5,7 +5,7 @@ DROP TABLE IF EXISTS groups;
 DROP TABLE IF EXISTS rooms;
 
 CREATE TABLE users (
-	user_id int PRIMARY KEY,
+    user_id int PRIMARY KEY,
     user_name varchar(20) NOT NULL,
     group_id int NULL
 );
@@ -18,7 +18,7 @@ INSERT INTO users (user_id, user_name, group_id) VALUES (5, 'Saulat', 3);
 INSERT INTO users (user_id, user_name, group_id) VALUES (6, 'Heidy', NULL);
 
 CREATE TABLE groups (
-	group_id int PRIMARY KEY,
+    group_id int PRIMARY KEY,
     group_name varchar(20) NOT NULL
 );
 
@@ -28,7 +28,7 @@ INSERT INTO groups (group_id, group_name) VALUES (3, 'Administration');
 INSERT INTO groups (group_id, group_name) VALUES (4, 'Operations');
 
 CREATE TABLE rooms (
-	room_id int PRIMARY KEY,
+    room_id int PRIMARY KEY,
     room_name varchar(20) NOT NULL
 );
 
@@ -38,7 +38,7 @@ INSERT INTO rooms (room_id, room_name) VALUES (3, 'Auditorium A');
 INSERT INTO rooms (room_id, room_name) VALUES (4, 'Auditorium B');
 
 CREATE TABLE group_rooms (
-	group_id int NOT NULL REFERENCES groups(group_id),
+    group_id int NOT NULL REFERENCES groups(group_id),
     room_id int NOT NULL REFERENCES rooms(room_id),
     CONSTRAINT pk_group_rooms PRIMARY KEY (group_id, room_id)
 );
@@ -68,11 +68,11 @@ ORDER BY room, group;
 SELECT u.user_name AS user, g.group_name AS 'group', r.room_name AS room
 	FROM users u
 		LEFT JOIN groups g
-        ON u.group_id = g.group_id
+        	ON u.group_id = g.group_id
 			LEFT JOIN group_rooms gr
-            ON g.group_id = gr.group_id
+            		ON g.group_id = gr.group_id
 				LEFT JOIN rooms r
-                ON gr.room_id = r.room_id
+                		ON gr.room_id = r.room_id
  ORDER BY user, 'group', room;    
  
  
